@@ -54,12 +54,10 @@ const showErrorEmptyMessage = ()=>{
       });
 }
 
-let containsMessage = "";
 
 function buttonEncrypt(){
     if (inputEncrypt.value == "") {
         showErrorEmptyMessage();
-        containsMessage = "";
     }else{
         if(!messageValidation(inputEncrypt.value)) return;
         const encryptedMessage = encrypt(inputEncrypt.value);
@@ -99,13 +97,16 @@ const decrypt = (message) => {
 }
 
 function buttonDecrypt(){
-    if (containsMessage == "") {
+    if (inputEncrypt.value == "") {
         showErrorEmptyMessage();
     }else{
         titleEncryptedSection.innerHTML= "Texto desencriptado  <i class='fa-regular fa-eye'></i>"
         
-        const decryptedMessage = decrypt(showEncryptedMessage.innerText);
+        const decryptedMessage = decrypt(inputEncrypt.value);
+        console.log("desencriptado",decryptedMessage);
+        
         showEncryptedMessage.innerText = decryptedMessage
+        inputEncrypt.value =""
         return decryptedMessage
     }
     
