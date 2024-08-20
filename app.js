@@ -12,7 +12,7 @@ const sectionMesssage = document.querySelector(".index__main__section__show__tes
 // La letra "o" es convertida para "ober"
 // La letra "u" es convertida para "ufat"
 
-const encrypt = (messageToEncrypt) => {
+const encrypt = (message) => {
     const stringValues = [
         ["e", "enter"], 
         ["i", "imes"],
@@ -20,7 +20,7 @@ const encrypt = (messageToEncrypt) => {
         ["o", "ober"],
         ["u", "ufat"]
 ]
-    let message = messageToEncrypt.toLowerCase()
+    
     for (let i = 0; i < stringValues.length; i++) {
         if(message.includes(stringValues[i][0])){
             message = message.replaceAll(stringValues[i][0], stringValues[i][1])
@@ -30,11 +30,26 @@ const encrypt = (messageToEncrypt) => {
     return message;
 }
 
+const messageValidation = (message)=>{
+    const regex = /^[a-z0-9\s]+$/;
+     if(!regex.test(message)){
+         Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Sólo se permiten letras minúsculas, sin tildes ni caracteres especiales",
+            confirmButtonColor:"#052051",
+          });
+          return false
+     }else{
+        return true
+     }
+}
+
 const showErrorEmptyMessage = ()=>{
     Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Debe ingresar un texto",
+        text: "Debe ingresar un texto válido",
         confirmButtonColor:"#052051",
       });
 }
@@ -46,11 +61,9 @@ function buttonEncrypt(){
         showErrorEmptyMessage();
         containsMessage = "";
     }else{
-
+        if(!messageValidation(inputEncrypt.value)) return;
         const encryptedMessage = encrypt(inputEncrypt.value);
         showEncryptedMessage.innerText = encryptedMessage
-        console.log("NEW VALUE",showEncryptedMessage.value);
-        
         showEncryptedMessage.style.fontSize="1.5rem";
         showEncryptedMessage.style.color="white";
         titleEncryptedSection.style.display= "block";
@@ -61,12 +74,13 @@ function buttonEncrypt(){
         sectionMesssage.style.justifyContent="flex-start"
         inputEncrypt.value =""
         containsMessage = encryptedMessage
+        
         return encryptedMessage
     }
     
 }
 
-const decrypt = (messageToDecrypt) => {
+const decrypt = (message) => {
     const stringValues = [
         ["e", "enter"], 
         ["i", "imes"],
@@ -74,7 +88,7 @@ const decrypt = (messageToDecrypt) => {
         ["o", "ober"],
         ["u", "ufat"]
 ]
-    let message = messageToDecrypt.toLowerCase()
+ 
     for (let i = 0; i < stringValues.length; i++) {
         if(message.includes(stringValues[i][1])){
             message = message.replaceAll(stringValues[i][1], stringValues[i][0])
@@ -92,7 +106,6 @@ function buttonDecrypt(){
         
         const decryptedMessage = decrypt(showEncryptedMessage.innerText);
         showEncryptedMessage.innerText = decryptedMessage
-        console.log("NEW VALUE",showEncryptedMessage.value);
         return decryptedMessage
     }
     
@@ -111,5 +124,4 @@ const copyText = ()=> {
         timer: 1500
       });
      
-
   }
