@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador de texto</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://kit.fontawesome.com/fc9c9e5a32.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header> 
+        <a href="https://www.aluracursos.com/" target="_blank" class="index__header__logo"><img src="assets/Logo.png" alt="Logo de Alura"></a>
+    </header>
+    
+    <main class="index__main">
+        <section class="index__main__section__input">
+            <div class="index__main__section__input__div-text">
+            <input type="text" placeholder="Ingrese el texto aquí" class="input__encrypt">
+            </div>
+            <p  class="index__main__p-disclaimer"><i class="fa-solid fa-circle-info"></i> Sólo letras minúsculas y sin acentos</p>
+            <div class="index__main__section__input__div__buttons">
+                <button class="button__secret" onclick="buttonEncrypt()">Encriptar</button>
+                <button class="button__reveal" onclick="buttonDecrypt()">Desencriptar</button>
+            </div>
+        </section>
+       
+        <section class="index__main__section__show__test">
+            <h2 class="section__encripted__title"></h2>
+            <img src="assets/Muñeco.png" alt="muñeco con lupa" class="image__doll">
+            <h3 class="section__encripted__empty__message">Ningún mensaje fue encontrado</h3>
+            <p  class="encrypted__text">Ingresa el texto que desees encriptar o desencriptar</p>
+            <button class="button__copy" onclick="copyText()">Copiar</button>
+        </section>
+           
+    </main>
+    <footer>
+        <p>Hecho por Melany Strack</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
